@@ -1,0 +1,18 @@
+{
+    "name":         "",
+    "description":  "",
+    "version":      "",
+    "author":       "Brian Peacock",
+    "main":         "src/main.js",
+    "dependencies": {
+        
+    },
+    "devDependencies": {
+        "browserify":   "3.24.x",
+        "grunt":        "~0.4.2",
+        "grunt-contrib-watch": "0.5.x",
+        "grunt-browserify": "1.3.x"
+    },
+    "license": "MIT",
+    "keywords": []
+}
