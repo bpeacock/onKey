@@ -5,7 +5,7 @@
   "author": "Brian Peacock",
   "main": "src/main.js",
   "dependencies": {
-    "underscore": "~1.6.0"
+    
   },
   "devDependencies": {
     "browserify": "~3.24.x",

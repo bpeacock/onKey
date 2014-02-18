@@ -1,5 +1,4 @@
-var $ = require('selector'),
-    _ = require('underscore');
+var $ = require('selector');
 
 var $document = $('document');
 
@@ -38,8 +37,8 @@ Event.prototype = {
             });
         }
 
-        if(_.isObject(config)) {
-            _.each(events, function(callback, key) {
+        if($.isPlainObject(config)) {
+            $.each(events, function(key, callback) {
                 self._add(type, key, callback);
             });
         }
