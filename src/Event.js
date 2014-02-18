@@ -1,4 +1,4 @@
-var $ = require('selector');
+var $ = require('unopinionate').selector;
 
 var $document = $('document');
 

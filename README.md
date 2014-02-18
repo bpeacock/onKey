@@ -3,7 +3,7 @@ To Install:
 
 ```bash
 npm install
-npm install ../../selector
+npm install ../../unopinionate
 ```
 
 Unbundled Dependencies:
