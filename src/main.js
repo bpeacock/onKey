@@ -1,5 +1,4 @@
-var $ = require('jquery'),
-    Event = require('./Event.js');
+var Event = require('./Event.js');
 
 var key = function(selector) { //Factory for Event objects
     return new Event(selector);

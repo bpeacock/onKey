@@ -1,6 +1,7 @@
-var $           = require('jquery'),
-    _           = require('underscore'),
-    $document   = $('document');
+var $ = require('selector'),
+    _ = require('underscore');
+
+var $document = $('document');
 
 var Event = function(selector) {
     this.$ = selector ? $(selector) : $document;
@@ -23,13 +24,15 @@ Event.prototype = {
             this.callbacks[type] = [];
 
             this.$.bind('key' + type, function(e) {
-                var callbacks = self.callbacks[type];
+                if(self.active) {
+                    var callbacks = self.callbacks[type];
 
-                for(var i=0; i<events.length; i++) {
-                    var callback = callbacks[i];
+                    for(var i=0; i<events.length; i++) {
+                        var callback = callbacks[i];
 
-                    if(!callback.conditions || self._validate(callback.conditions, e)) {
-                        callback(e);
+                        if(!callback.conditions || self._validate(callback.conditions, e)) {
+                            callback(e);
+                        }
                     }
                 }
             });
@@ -82,8 +85,6 @@ Event.prototype = {
                 ((c.ctrl == e.metaKey) != (c.ctrl == e.ctrlKey)) &&
                 (c.noMeta ? !e.shiftKey && !e.altKey && !e.ctrlKey && !e.metaKey : true);
     }
-
-    
 };
 
 module.exports = Event;
