@@ -1,3 +1,9 @@
+To Install:
+
+```bash
+npm install
+```
+
 To Build:
 
 ```bash
