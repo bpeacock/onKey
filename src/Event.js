@@ -1,10 +1,11 @@
 var $ = require('unopinionate').selector;
 
-var $document = $('document');
+var $document = $(window);
 
 var Event = function(selector) {
-    this.$ = selector ? $(selector) : $document;
-    this.callbacks = [];
+    this.$scope     = selector ? $(selector) : $document;
+    this.callbacks  = [];
+    this.active     = true;
 };
 
 Event.prototype = {
@@ -22,7 +23,7 @@ Event.prototype = {
         if(!this.callbacks[type]) {
             this.callbacks[type] = [];
 
-            this.$.bind('key' + type, function(e) {
+            this.$scope.bind('key' + type, function(e) {
                 if(self.active) {
                     var callbacks = self.callbacks[type];
 
@@ -36,14 +37,14 @@ Event.prototype = {
                 }
             });
         }
-
-        if($.isPlainObject(config)) {
+        
+        if($.isPlainObject(events)) {
             $.each(events, function(key, callback) {
                 self._add(type, key, callback);
             });
         }
         else {
-            this._add(type, false, config);
+            this._add(type, false, events);
         }
 
         return this;
@@ -57,7 +58,7 @@ Event.prototype = {
         return this;
     },
     destroy: function() {
-        this.$.unbind('keydown');
+        this.$scope.unbind('keydown');
     },
 
     /*** Internal Functions ***/
@@ -66,7 +67,7 @@ Event.prototype = {
             callback.conditions = this._parseConditions(conditions);
         }
 
-        this.events[type].push(callback);
+        this.callbacks[type].push(callback);
     },
     _parseConditions: function(c) {
         return {

@@ -3,7 +3,6 @@ To Install:
 
 ```bash
 npm install
-npm install ../../unopinionate
 ```
 
 Unbundled Dependencies:
