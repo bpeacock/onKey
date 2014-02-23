@@ -15,3 +15,11 @@ To Develop:
 ```bash
 grunt watch
 ```
+
+To Test:
+ 
+ ```bash
+ npm install -g mocha
+ mocha
+ ```
+ 
