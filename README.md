@@ -1,3 +1,8 @@
+onKey.js
+========
+
+A key event controller w/ hot-keys
+
 Installation
 ------------
 
