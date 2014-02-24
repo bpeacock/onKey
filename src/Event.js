@@ -79,10 +79,10 @@ Event.prototype = {
         };
     },
     _validate: function(c, e) {
-        return  c.key ? c.key == e.which : true &&
-                c.shift == e.shiftKey &&
-                c.alt   == e.altKey &&
-                ((c.ctrl == e.metaKey) != (c.ctrl == e.ctrlKey)) &&
+        return  c.key ? c.key === e.which : true &&
+                c.shift === e.shiftKey &&
+                c.alt   === e.altKey &&
+                ((c.ctrl === e.metaKey) !== (c.ctrl === e.ctrlKey)) &&
                 (c.noMeta ? !e.shiftKey && !e.altKey && !e.ctrlKey && !e.metaKey : true);
     }
 };

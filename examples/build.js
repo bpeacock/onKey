@@ -1,5 +1,5 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var key = require("../src/main.js");
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.onKey=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+var key = _dereq_("../src/main.js");
 
 key.down(function(e) {
     console.log('this is a global keydown');
@@ -8,7 +8,8 @@ key.down(function(e) {
 key($('input')).up(function(e) {
     console.log('this is a keydown in the input');
 });
-},{"../src/main.js":4}],2:[function(require,module,exports){
+
+},{"../src/main.js":4}],2:[function(_dereq_,module,exports){
 (function(root) {
     var unopinionate = {
         selector: root.jQuery || root.Zepto || root.ender || root.$,
@@ -33,8 +34,8 @@ key($('input')).up(function(e) {
     }
 })(typeof window != 'undefined' ? window : this);
 
-},{}],3:[function(require,module,exports){
-var $ = require('unopinionate').selector;
+},{}],3:[function(_dereq_,module,exports){
+var $ = _dereq_('unopinionate').selector;
 
 var $document = $(window);
 
@@ -73,7 +74,7 @@ Event.prototype = {
                 }
             });
         }
-        
+
         if($.isPlainObject(events)) {
             $.each(events, function(key, callback) {
                 self._add(type, key, callback);
@@ -115,17 +116,17 @@ Event.prototype = {
         };
     },
     _validate: function(c, e) {
-        return  c.key ? c.key == e.which : true &&
-                c.shift == e.shiftKey &&
-                c.alt   == e.altKey &&
-                ((c.ctrl == e.metaKey) != (c.ctrl == e.ctrlKey)) &&
+        return  c.key ? c.key === e.which : true &&
+                c.shift === e.shiftKey &&
+                c.alt   === e.altKey &&
+                ((c.ctrl === e.metaKey) !== (c.ctrl === e.ctrlKey)) &&
                 (c.noMeta ? !e.shiftKey && !e.altKey && !e.ctrlKey && !e.metaKey : true);
     }
 };
 
 module.exports = Event;
-},{"unopinionate":2}],4:[function(require,module,exports){
-var Event = require('./Event.js');
+},{"unopinionate":2}],4:[function(_dereq_,module,exports){
+var Event = _dereq_('./Event.js');
 
 var key = function(selector) { //Factory for Event objects
     return new Event(selector);
@@ -142,3 +143,5 @@ key.up = function(config) {
 module.exports = key;
 
 },{"./Event.js":3}]},{},[1])
+(1)
+});

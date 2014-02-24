@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         browserify: {
             dist: {
                 files: {
-                    'dist/subview.js':      ['src/main.js'],
+                    'dist/onKey.js':        ['src/main.js'],
                     'examples/build.js':    ['examples/example.js']
                 },
                 options: {
@@ -33,7 +33,10 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                    'dist/lib.min.js': ['dist/lib.js']
+                    'dist/onKey.min.js': ['dist/onKey.js']
+                },
+                options: {
+                    sourceMap: true
                 }
             }
         },
