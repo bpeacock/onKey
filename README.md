@@ -7,7 +7,7 @@ npm install
 To Build:
 
 ```bash
-grunt browserify
+grunt build
 ```
 
 To Develop:
