@@ -11,3 +11,7 @@ module("onClick", {
         
     }
 });
+
+test('sample', function() {
+    ok(true);
+});

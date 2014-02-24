@@ -3,14 +3,18 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         browserify: {
             dist: {
-                'dist/lib.js':          ['src/main.js'],
-                'examples/build.js':    ['examples/example.js'],
+                files: {
+                    'dist/lib.js':          ['src/main.js'],
+                    'examples/build.js':    ['examples/example.js']
+                },
                 options: {
                     //standalone: ''
                 }
             },
             test: {
-                'test/build.js':        ['test/test.js']
+                files: {
+                    'test/build.js':        ['test/test.js']
+                }
             }
         },
         watch: {
