@@ -3,6 +3,7 @@ var $ = require('unopinionate').selector;
 var $document = $(window);
 
 var Event = function(selector) {
+    this.selector   = selector;
     this.$scope     = selector ? $(selector) : $document;
     this.callbacks  = [];
     this.active     = true;
@@ -19,24 +20,6 @@ Event.prototype = {
     },
     bind: function(type, events) {
         var self = this;
-
-        if(!this.callbacks[type]) {
-            this.callbacks[type] = [];
-
-            this.$scope.bind('key' + type, function(e) {
-                if(self.active) {
-                    var callbacks = self.callbacks[type];
-
-                    for(var i=0; i<events.length; i++) {
-                        var callback = callbacks[i];
-
-                        if(!callback.conditions || self._validate(callback.conditions, e)) {
-                            callback(e);
-                        }
-                    }
-                }
-            });
-        }
 
         if($.isPlainObject(events)) {
             $.each(events, function(key, callback) {
@@ -58,11 +41,31 @@ Event.prototype = {
         return this;
     },
     destroy: function() {
-        this.$scope.unbind('keydown');
+        this.$scope.unbind('keydown keyup');
     },
 
     /*** Internal Functions ***/
     _add: function(type, conditions, callback) {
+        var self = this;
+
+        if(!this.callbacks[type]) {
+            this.callbacks[type] = [];
+
+            this.$scope.bind('key' + type, function(e) {
+                if(self.active) {
+                    var callbacks = self.callbacks[type];
+
+                    for(var i=0; i<callbacks.length; i++) {
+                        var callback = callbacks[i];
+
+                        if(!callback.conditions || self._validate(callback.conditions, e)) {
+                            callback(e);
+                        }
+                    }
+                }
+            });
+        }
+
         if(conditions) {
             callback.conditions = this._parseConditions(conditions);
         }

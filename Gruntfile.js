@@ -14,12 +14,15 @@ module.exports = function(grunt) {
             test: {
                 files: {
                     'test/build.js':        ['test/test.js']
+                },
+                options: {
+                    debug: true
                 }
             }
         },
         watch: {
-            files: [ "src/**/*", "examples/example.js"],
-            tasks: [ 'browserify:dist' ]
+            files: [ "src/**/*", "examples/example.js", "test/test.js"],
+            tasks: [ 'browserify' ]
         },
         jshint: {
             options: {
