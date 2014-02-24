@@ -4,6 +4,7 @@ module.exports = function(grunt) {
         browserify: {
             'dist/lib.js':          ['src/main.js'],
             'examples/build.js':    ['examples/example.js'],
+            'test/build.js':        ['test/test.js'],
             options: {
                 //standalone: ''
             }
