@@ -18,8 +18,6 @@ grunt watch
 
 To Test:
  
- ```bash
- npm install -g mocha
- mocha
- ```
- 
+```bash
+npm test
+```
