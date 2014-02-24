@@ -2,16 +2,20 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         browserify: {
-            'dist/lib.js':          ['src/main.js'],
-            'examples/build.js':    ['examples/example.js'],
-            'test/build.js':        ['test/test.js'],
-            options: {
-                //standalone: ''
+            dist: {
+                'dist/lib.js':          ['src/main.js'],
+                'examples/build.js':    ['examples/example.js'],
+                options: {
+                    //standalone: ''
+                }
+            },
+            test: {
+                'test/build.js':        ['test/test.js']
             }
         },
         watch: {
             files: [ "src/**/*", "examples/example.js"],
-            tasks: [ 'browserify' ]
+            tasks: [ 'browserify:dist' ]
         },
         jshint: {
             options: {
@@ -41,13 +45,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('test', [
+        'browserify:test',
         'qunit',
         'jshint'
     ]);
 
     grunt.registerTask('build', [
         'test',
-        'browserify',
+        'browserify:dist',
         'uglify'
     ]);
 };
