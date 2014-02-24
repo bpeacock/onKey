@@ -1,5 +1,5 @@
-onKey.js
-========
+onKey.js [![Build Status](https://travis-ci.org/bpeacock/onKey.png?branch=master)](https://travis-ci.org/bpeacock/onKey)
+============
 
 A key event controller w/ hot-keys.
 
