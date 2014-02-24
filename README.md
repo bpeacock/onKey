@@ -1,27 +1,34 @@
-To Install:
------------
+Installation
+------------
 
 ```bash
 npm install
 ```
 
-Unbundled Dependencies:
------------------------
+Usage
+-----
 
 A jQuery-like selector library is required:
 - jQuery 1.4.3+
 - Zepto
 
+Development
+-----------
+
 To Build:
----------
 
 ```bash
-grunt browserify
+grunt build
 ```
 
 To Develop:
------------
 
 ```bash
 grunt watch
+```
+
+To Test:
+ 
+```bash
+npm test
 ```

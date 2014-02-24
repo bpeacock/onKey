@@ -1,3 +1,39 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var key = require("../src/main.js");
+
+key.down(function(e) {
+    console.log('this is a global keydown');
+});
+
+key($('input')).up(function(e) {
+    console.log('this is a keydown in the input');
+});
+},{"../src/main.js":4}],2:[function(require,module,exports){
+(function(root) {
+    var unopinionate = {
+        selector: root.jQuery || root.Zepto || root.ender || root.$,
+        template: root.Handlebars || root.Mustache
+    };
+
+    /*** Export ***/
+
+    //AMD
+    if(typeof define === 'function' && define.amd) {
+        define([], function() {
+            return unopinionate;
+        });
+    }
+    //CommonJS
+    else if(typeof module.exports !== 'undefined') {
+        module.exports = unopinionate;
+    }
+    //Global
+    else {
+        root.unopinionate = unopinionate;
+    }
+})(typeof window != 'undefined' ? window : this);
+
+},{}],3:[function(require,module,exports){
 var $ = require('unopinionate').selector;
 
 var $document = $(window);
@@ -37,7 +73,7 @@ Event.prototype = {
                 }
             });
         }
-
+        
         if($.isPlainObject(events)) {
             $.each(events, function(key, callback) {
                 self._add(type, key, callback);
@@ -88,3 +124,21 @@ Event.prototype = {
 };
 
 module.exports = Event;
+},{"unopinionate":2}],4:[function(require,module,exports){
+var Event = require('./Event.js');
+
+var key = function(selector) { //Factory for Event objects
+    return new Event(selector);
+};
+
+key.down = function(config) {
+    return new Event().down(config);
+};
+
+key.up = function(config) {
+    return new Event().up(config);
+};
+
+module.exports = key;
+
+},{"./Event.js":3}]},{},[1])
