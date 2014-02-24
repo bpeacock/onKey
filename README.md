@@ -32,7 +32,7 @@ key('#input').down(function() {
     alert('input keydown');
 });
 
-// Bind key codes
+// Bind hot-keys
 key.down({
     'ctrl-alt-tab': function() {
         console.log('ctr-alt-tab pressed!');
