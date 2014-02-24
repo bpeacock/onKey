@@ -1,12 +1,12 @@
 {
   "name":  "onkey",
   "description": "A key event controller w/ hot-keys",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Brian Peacock",
   "main": "src/main.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/bpeacock/onKey"
   },
   "dependencies": {
     "unopinionate": "0.0.x"
