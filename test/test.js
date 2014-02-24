@@ -11,7 +11,3 @@ module("onClick", {
         
     }
 });
-
-test("", function() {
-    
-});
