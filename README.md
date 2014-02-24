@@ -15,20 +15,8 @@ A jQuery-like selector library is required:
 Development
 -----------
 
-To Build:
+To Build: `grunt build`
 
-```bash
-grunt build
-```
+To Develop: `grunt watch`
 
-To Develop:
-
-```bash
-grunt watch
-```
-
-To Test:
- 
-```bash
-npm test
-```
+To Test: `npm test`

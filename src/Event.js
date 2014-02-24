@@ -1,10 +1,11 @@
-var $ = require('unopinionate').selector;
+var $ = require('unopinionate').selector,
+        specialKeys = require('./specialKeys');
 
-var $document = $(window);
+var $window = $(window);
 
 var Event = function(selector) {
     this.selector   = selector;
-    this.$scope     = selector ? $(selector) : $document;
+    this.$scope     = selector ? $(selector) : $window;
     this.callbacks  = [];
     this.active     = true;
 };
@@ -41,7 +42,9 @@ Event.prototype = {
         return this;
     },
     destroy: function() {
-        this.$scope.unbind('keydown keyup');
+        this.$scope
+            .unbind('keydown')
+            .unbind('keyup');
     },
 
     /*** Internal Functions ***/
@@ -57,7 +60,6 @@ Event.prototype = {
 
                     for(var i=0; i<callbacks.length; i++) {
                         var callback = callbacks[i];
-
                         if(!callback.conditions || self._validate(callback.conditions, e)) {
                             callback(e);
                         }
@@ -73,21 +75,64 @@ Event.prototype = {
         this.callbacks[type].push(callback);
     },
     _parseConditions: function(c) {
-        return {
-            //key:    ,
+        var conditions = {
             shift:   /\bshift\b/i.test(c),
-            alt:     /\balt\b/i.test(c),
-            ctrl:    /\bctrl\b/i.test(c),
-            noMeta:  /\bnoMeta\b/i.test(c)
+            alt:     /\b(alt|alternate)\b/i.test(c),
+            ctrl:    /\b(ctrl|control|cmd|command)\b/i.test(c)
         };
+
+        //Key Binding
+        var keys = c.match(/\b(?!shift|alt|alternate|ctrl|control|cmd|command)(\w+)\b/gi);
+
+        if(!keys) {
+            //Use modifier as key if there is no other key
+            keys = c.match(/\b(\w+)\b/gi);
+
+            //Modifiers should all be false
+            conditions.shift =
+            conditions.alt   =
+            conditions.ctrl  = false;
+        }
+
+        if(keys) {
+            conditions.key = keys[0];
+            
+            if(keys.length > 1) {
+                console.warn("More than one key bound in '"+c+"'. Using the first one ("+keys[0]+").");
+            }
+        }
+        else {
+            conditions.key      = null;
+            conditions.keyCode  = null;
+        }
+
+        return conditions;
+    },
+    _keyCodeTest: function(key, keyCode) {
+        if(typeof specialKeys[keyCode] !== 'undefined') {
+            var keyDef = specialKeys[keyCode];
+
+            if(keyDef instanceof RegExp) {
+                return keyDef.test(key);
+            }
+            else {
+                return keyDef === key.toLowerCase();
+            }
+        }
+        else if(key.length === 1) {
+            return key.toUpperCase().charCodeAt(0) === keyCode;
+        }
+        else {
+            return false;
+        }
     },
     _validate: function(c, e) {
-        return  c.key ? c.key === e.which : true &&
+        return  (c.key ? this._keyCodeTest(c.key, e.which) : true) &&
                 c.shift === e.shiftKey &&
                 c.alt   === e.altKey &&
-                ((c.ctrl === e.metaKey) !== (c.ctrl === e.ctrlKey)) &&
-                (c.noMeta ? !e.shiftKey && !e.altKey && !e.ctrlKey && !e.metaKey : true);
+                (!c.ctrl || (c.ctrl === e.metaKey) !== (c.ctrl === e.ctrlKey));
     }
 };
 
 module.exports = Event;
+
