@@ -1,5 +1,17 @@
-var should = require('should');
+var sinon = require('sinon'),
+    module = window.module,
+    sandbox;
 
-describe('myLib', function() {
+module("onClick", {
+    setup: function() {
+        sandbox         = sinon.sandbox.create();
 
+    },
+    teardown: function() {
+        
+    }
+});
+
+test("", function() {
+    
 });
