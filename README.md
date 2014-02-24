@@ -7,7 +7,7 @@ Installation
 ------------
 
 ```bash
-npm install
+npm install onKey
 ```
 
 In addition jQuery-like selector library is required:
