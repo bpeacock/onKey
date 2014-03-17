@@ -5,7 +5,6 @@ var $window = $(window);
 
 var Event = function(selector) {
     this.selector   = selector;
-    this.$scope     = selector ? $(selector) : $window;
     this.callbacks  = [];
     this.active     = true;
 };
@@ -42,7 +41,7 @@ Event.prototype = {
         return this;
     },
     destroy: function() {
-        this.$scope
+        $window
             .unbind('keydown')
             .unbind('keyup');
     },
@@ -54,7 +53,7 @@ Event.prototype = {
         if(!this.callbacks[type]) {
             this.callbacks[type] = [];
 
-            this.$scope.bind('key' + type, function(e) {
+            $window.bind('key' + type, this.selector, function(e) {
                 if(self.active) {
                     var callbacks = self.callbacks[type];
 
