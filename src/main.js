@@ -21,7 +21,7 @@ key.unbindAll = function() {
     return this;
 };
 
-//Creates new Event objects (checking for existing first)
+//Creates new Event objects and pushes them into events array
 key._createEvent = function(selector) {
     var e = new Event(selector);
     events.push(e);
