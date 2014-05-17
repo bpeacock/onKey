@@ -42,7 +42,6 @@ var $window = $(window);
 
 var Event = function(selector) {
     this.selector   = selector;
-    this.$scope     = selector ? $(selector) : $window;
     this.callbacks  = [];
     this.active     = true;
 };
@@ -79,7 +78,7 @@ Event.prototype = {
         return this;
     },
     destroy: function() {
-        this.$scope
+        $window
             .unbind('keydown')
             .unbind('keyup');
     },
@@ -91,14 +90,14 @@ Event.prototype = {
         if(!this.callbacks[type]) {
             this.callbacks[type] = [];
 
-            this.$scope.bind('key' + type, function(e) {
+            $window.bind('key' + type, this.selector, function(e) {
                 if(self.active) {
                     var callbacks = self.callbacks[type];
 
                     for(var i=0; i<callbacks.length; i++) {
                         var callback = callbacks[i];
                         if(!callback.conditions || self._validate(callback.conditions, e)) {
-                            callback(e);
+                            callback.apply(self, [e]);
                         }
                     }
                 }
@@ -139,7 +138,7 @@ Event.prototype = {
             }
         }
         else {
-            conditions.key      = null;
+            conditions.key      =
             conditions.keyCode  = null;
         }
 

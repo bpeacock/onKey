@@ -60,7 +60,7 @@ Event.prototype = {
                     for(var i=0; i<callbacks.length; i++) {
                         var callback = callbacks[i];
                         if(!callback.conditions || self._validate(callback.conditions, e)) {
-                            callback(e);
+                            callback.apply(self, [e]);
                         }
                     }
                 }
@@ -101,7 +101,7 @@ Event.prototype = {
             }
         }
         else {
-            conditions.key      = null;
+            conditions.key      =
             conditions.keyCode  = null;
         }
 

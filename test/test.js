@@ -381,4 +381,11 @@ test('shift binding', function() {
     ok(testCallback.called);
 });
 
+test('this in a callback should be the key object itself', function() {
+    var down = key.down(function() {
+        deepEqual(down, this);
+    });
+
+    $(window).trigger(e);
+});
 
