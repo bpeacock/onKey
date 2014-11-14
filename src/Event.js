@@ -81,7 +81,7 @@ Event.prototype = {
         };
 
         //Key Binding
-        var keys = c.match(/(?!shift|alt|alternate|ctrl|control|cmd|command)([a-z\u0060\-=\[\]\\;',\.\/]+)$/gi);
+        var keys = c.match(/\b(?!shift|alt|alternate|ctrl|control|cmd|command)([a-z\u0060\-=\[\]\\;',\.\/]+)\b/gi);
 
         if(!keys) {
             //Use modifier as key if there is no other key
