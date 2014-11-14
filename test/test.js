@@ -158,7 +158,7 @@ test('keyEvent._parseConditions Modifiers', function() {
     conditions = keyEvent._parseConditions('ALT a');
     ok(conditions.alt, "UPPERCASE Modifiers");
 
-    conditions = keyEvent._parseConditions('alt-a');
+    conditions = keyEvent._parseConditions('alt+a');
     ok(conditions.alt, "Dash Separators");
 
     conditions = keyEvent._parseConditions('ctrl shift alt a');
@@ -274,7 +274,7 @@ test('keyEvent._validate', function() {
             metaKey:    false,
             ctrlKey:    true
         }),
-        "ctrl-shift-b"
+        "ctrl+shift+b"
     );
 
     ok(
@@ -290,7 +290,7 @@ test('keyEvent._validate', function() {
             metaKey:    true,
             ctrlKey:    false
         }),
-        "cmd-shift-b"
+        "cmd+shift+b"
     );
 });
 
@@ -318,7 +318,7 @@ module("Conditional Key Bindings", {
 
 test('global key code', function() {
     key.down({
-        'ctrl-a': testCallback
+        'ctrl+a': testCallback
     });
 
     e.which    = 65;
@@ -331,7 +331,7 @@ test('global key code', function() {
 
 test('DOM element key code', function() {
     keyEvent.down({
-        'ctrl-a': testCallback
+        'ctrl+a': testCallback
     });
 
     e.which    = 65;
@@ -344,7 +344,7 @@ test('DOM element key code', function() {
 
 test('global key code no match', function() {
     key.down({
-        'ctrl-shift-a': testCallback
+        'ctrl+shift+a': testCallback
     });
 
     e.which    = 65;
@@ -357,7 +357,7 @@ test('global key code no match', function() {
 
 test('cmd key matches ctrl key', function() {
     key.down({
-        'cmd-shift-a': testCallback
+        'cmd+shift+a': testCallback
     });
 
     e.which    = 65;
