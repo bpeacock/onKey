@@ -292,6 +292,39 @@ test('keyEvent._validate', function() {
         }),
         "cmd+shift+b"
     );
+
+    ok(
+        keyEvent._validate({
+            key:        '-',
+            shift:      true,
+            alt:        false,
+            ctrl:       true
+        }, {
+            which:      189,
+            shiftKey:   true,
+            altKey:     false,
+            metaKey:    true,
+            ctrlKey:    false
+        }),
+        "cmd shift - (special key)"
+    );
+
+    ok(
+        keyEvent._validate({
+            key:        '/',
+            shift:      false,
+            alt:        false,
+            ctrl:       true
+        }, {
+            which:      191,
+            shiftKey:   false,
+            altKey:     false,
+            metaKey:    true,
+            ctrlKey:    false
+        }),
+        "cmd+/ (another special key)"
+    );
+
 });
 
 
