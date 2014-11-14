@@ -70,6 +70,8 @@ key
     .destroy(); //Completely unbinds the key events in an event object
 ```
 
+**Note**: Since version 0.1.0 you can't use `-` as hotkey separator since it can be used as a valid key combination, such as `cmd -`. It's recommended to use spaces or `+`.
+
 Development
 -----------
 
