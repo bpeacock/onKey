@@ -34,10 +34,10 @@ key('#input').down(function() {
 
 // Bind hot-keys
 key.down({
-    'ctrl-alt-tab': function() {
-        console.log('ctr-alt-tab pressed!');
+    'ctrl+alt+tab': function() {
+        console.log('ctr+alt+tab pressed!');
     },
-    'cmd-a': function() {
+    'cmd+a': function() {
         console.log('cmd & ctrl are normalized so that hot-keys work consistently across operating systems');
     }
 });
@@ -56,7 +56,7 @@ keyEvent.on();
 // keyEvent will fire
 
 keyEvent.up({
-    'ctrl-a': function() {
+    'ctrl+a': function() {
         alert('Another binding to the same input!');
     }
 });
@@ -69,6 +69,8 @@ key
     .off()
     .destroy(); //Completely unbinds the key events in an event object
 ```
+
+**Note**: Since version 0.1.0 you can't use `-` as hotkey separator since it can be used as a valid key combination, such as `cmd -`. It's recommended to use spaces or `+`.
 
 Development
 -----------

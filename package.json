@@ -1,7 +1,7 @@
 {
   "name": "onkey",
   "description": "A key event controller w/ hot-keys",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "author": "Brian Peacock",
   "main": "src/main.js",
   "repository": {
