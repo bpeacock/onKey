@@ -1,5 +1,5 @@
 var $ = require('unopinionate').selector,
-        specialKeys = require('./specialKeys');
+    specialKeys = require('./specialKeys');
 
 var $window = $(window);
 
